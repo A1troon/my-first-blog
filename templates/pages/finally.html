@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <form method="POST">
+            {% csrf_token %}
+        <input type="submit" value="погнали" >
+    </form>
+
+    <table width="50" border="1" style="float: left;">
+        <thead><th>1</th></thead>
+        {% for Str in chelovechki %}
+        <tr>
+            <td> {{ Str}}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+    <table width="50" border="1">
+    <thead><th>2</th></thead>
+    {% for Integer in chisla %}
+        <tr>
+            <td>{{ Integer}}</td>{% endfor %}
+        </tr>
+
+    </table>
+    <form action="/" >
+   <button>Главное меню</button>
+  </form>
+    </body>
+
+</body>
+</html>

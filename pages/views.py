@@ -87,3 +87,22 @@ def add_more_interes(request, id):
         new_student.save()
 
     return render(request,"pages/dopinteres.html",{})
+def search(request):
+    back = []
+    mas=[]
+    mas_string=[]
+    for men in Person.objects.all():
+       mas.append(men)
+    if request.method == "POST":
+        temp=0
+        for i in range(Person.objects.all().count()-1):
+            for j in range(i+1, Person.objects.all().count()):
+                string=mas[i].name+" "+mas[j].name
+                mas_string.append(string)
+                for k in mas[i].interest_set.all():
+                    for l in mas[j].interest_set.all():
+                        if k.name==l.name:
+                            temp+=1
+                back.append(temp)
+                temp=0
+    return render(request,"pages/finally.html",{"persons":mas,"chisla":back,"chelovechki":mas_string})
