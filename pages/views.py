@@ -29,6 +29,13 @@ def Upload_file(request):
                 new_interest = Interest.build(p[2].decode('utf-8'))
                 new_student = student.objects.create(name=new_person, interest=new_interest, group=p[1].decode('utf-8'))
                 new_student.save()
+                if len(p)>2:
+                    i=3
+                    while i<len(p):
+                        new_interest = Interest.build(p[i].decode('utf-8'))
+                        new_student = student(name=new_person,interest=new_interest)
+                        new_student.save()
+                        i+=1
                 a = request.FILES['file'].readline()
             return HttpResponse("гуд джоб")
     else:
