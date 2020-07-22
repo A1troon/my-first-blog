@@ -1,0 +1,17 @@
+<html>
+    <body>
+            <p>
+                {% for interest in interests %}
+                    <p>
+                        {{ interest.name }}
+                    </p>
+                    <p>
+                        <br>{%  for Person in interest.students.all %}{{  Person}}</br>{% endfor %}
+                    </p>
+
+
+                {% endfor %}
+            </p>
+
+    </body>
+</html>

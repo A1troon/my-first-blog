@@ -1,0 +1,83 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Модели в Django</title>
+</head>
+<table
+border="1"
+align="center"
+rules="rows"
+style="width:60%;">
+<!--Создаём строку-->
+<tr>
+<!--Создаём ячейку строки-->
+<td>
+<body class="container">
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите имя</label><br>
+            <input type="text" name="name" />
+        </p>
+         <p>
+            <label>Введите интерес</label><br>
+            <input type="text" name="interest" />
+        </p>
+        <p>
+            <label>Введите группу</label><br>
+            <input type="text" name="group" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+<td bgcolor="#e6e6fa">
+
+    {% if men.count > 0 %}
+    <h3>Список Студентов </h3>
+    <table>
+    <style type="text/css">
+
+   TH {
+    text-align: left; /* Выравнивание текста по левому краю */
+    border-bottom: 1px solid #000; /* Линия под верхним заголовком */
+   }
+  </style>
+
+        {% for Person in men %}
+
+            <tr>
+                <td>
+                {{ Person.id }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                {{ Person.name }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                {% for Interest in  Person.interest_set.all %}{{  Interest}} {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                {% for student in Person.student_set.all %}{{  student}}{% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <a href="edit/{{Person.id}}">Изменить</a> | <a href="delete/{{Person.id}}">Удалить</a>| <a href="addmoreinteres/{{Person.id}}">Добавить еще интерес</a>
+                </td>
+            </tr>
+            <th>
+
+            </th>
+
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
+
+    </body>
+</html>
