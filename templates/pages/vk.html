@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <form method="POST" action="vkparsing">
+        {% csrf_token %}
+        <p>
+            <label>Введите vkid</label><br>
+            <input type="text" name="vkid" />
+        </p>
+             <input type="submit" value="Сохранить" >
+        </form>
+    </body>
+</html>

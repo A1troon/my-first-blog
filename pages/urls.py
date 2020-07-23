@@ -13,5 +13,6 @@ urlpatterns = [
     path('create/', views.create),
     path('addmoreinteres/<int:id>/',views.add_more_interes),
     path('search',views.search),
+    path('vkparsing',views.vk)
 
 ]

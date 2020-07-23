@@ -1,6 +1,9 @@
+import  requests
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse,HttpResponseNotFound
 from .models import student, studentForm, Interest, Person, UploadFileForm
+import requests
+import io
 def first(request):
     return render(request, 'pages/main.html', {})
 def second(request):
@@ -24,15 +27,15 @@ def Upload_file(request):
         if form.is_valid():
             a = request.FILES['file'].readline()
             while a:
-                p=a.split()
-                new_person = Person.objects.create(name=p[0].decode('utf-8'))
-                new_interest = Interest.build(p[2].decode('utf-8'))
-                new_student = student.objects.create(name=new_person, interest=new_interest, group=p[1].decode('utf-8'))
+                p=a.decode('utf-8').split(",")
+                new_person = Person.objects.create(name=p[0])
+                new_interest = Interest.build(p[2])
+                new_student = student.objects.create(name=new_person, interest=new_interest, group=p[1])
                 new_student.save()
                 if len(p)>2:
                     i=3
                     while i<len(p):
-                        new_interest = Interest.build(p[i].decode('utf-8'))
+                        new_interest = Interest.build(p[i])
                         new_student = student(name=new_person,interest=new_interest)
                         new_student.save()
                         i+=1
@@ -106,3 +109,74 @@ def search(request):
                 back.append(temp)
                 temp=0
     return render(request,"pages/finally.html",{"persons":mas,"chisla":back,"chelovechki":mas_string})
+
+
+#--------------------------------------------------------------------------------------------------
+def vk(request):
+    def first(id):
+        token = '76270dc776270dc776270dc774765425087762776270dc7293e437330e1d750888753e4'
+        version = '5.120'
+        user_id = id
+        response = requests.get('https://api.vk.com/method/users.getSubscriptions',
+                                params={'access_token': token,
+                                        'v': version,
+                                        'user_id': user_id,
+
+                                        }
+                                )
+        data = response.json()['response']['groups']['items']
+        return data
+
+    def second(id):
+        token = '76270dc776270dc776270dc774765425087762776270dc7293e437330e1d750888753e4'
+        version = '5.120'
+        group_id = id
+        secondresponse = requests.get('https://api.vk.com/method/groups.getById',
+                                      params={'access_token': token,
+                                              'v': version,
+                                              'group_id': group_id
+                                              }
+                                      )
+        seconddata = secondresponse.json()['response'][0]['name']
+        return seconddata
+
+    def third(id):
+        token = '76270dc776270dc776270dc774765425087762776270dc7293e437330e1d750888753e4'
+        version = '5.120'
+        user_id = id
+        response = requests.get('https://api.vk.com/method/users.get',
+                                params={'access_token': token,
+                                        'v': version,
+                                        'user_id': user_id,
+                                        'lang': 0,
+                                        }
+                                )
+        data = response.json()['response'][0]['first_name']
+        return data
+    if request.method=='POST' :
+        vkid=request.POST.get("vkid")
+        myfile = io.open("media/hello.txt", "w", encoding="utf-8")
+        name=third(vkid)
+        myfile.write(name + ",")
+        data=first(vkid)
+        myfile.write("нет группы,")
+        for i in data:
+            myfile.write(second(i)+",")
+        myfile.close()
+        myfile = io.open("media/hello.txt", "r", encoding="utf-8")
+        a = myfile.readline()
+        p = a.split(",")
+        new_person = Person.objects.create(name=p[0])
+        new_interest = Interest.build(p[2])
+        new_student = student.objects.create(name=new_person, interest=new_interest, group=p[1])
+        new_student.save()
+        if len(p) > 2:
+            i = 3
+            while i < len(p):
+                new_interest = Interest.build(p[i])
+                new_student = student(name=new_person, interest=new_interest)
+                new_student.save()
+                i += 1
+        myfile.close()
+        return HttpResponse("гуд джоб")
+    return render(request,"pages/vk.html",{})
