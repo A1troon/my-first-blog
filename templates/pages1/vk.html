@@ -6,7 +6,7 @@
     <title>Адрес страницы вк</title>
 </head>
 <body>
-
+<p style="color:#ff0000">{{keyerror }}</p>
     <style>
             body { background: #efefef ; }
         </style>
@@ -14,8 +14,9 @@
 		<a class=" text-dark mr-md-auto " href="/"> Главная страница</a>
 		<nav class="my-2 my-md-0 mr-md-3">
 		<!--	 <a class="p-2 text-dark" href="/789">Загрузка файлов</a> -->
-			<a class="p-2 text-dark " href="/123">Студенты</a>
+			<a class="p-2 text-dark " href="/456">Студенты</a>
 		</nav>
+		<a class="btn btn-outline-primary" href="/admin">Админ</a>
 	</div>
 
 
@@ -34,6 +35,22 @@
            </form>
 
     </div>
-<h1 style="color:#ff0000" class="h3 mb-3 font-weight-normal">{{keyerror }}</h1>
+<div class="col-3 offset-4">
+
+    <h1 class="h3 mb-3 font-weight-normal">Введите короткое название страницы</h1>
+
+    <form method="POST" action="InfoId">
+        {% csrf_token %}
+        <p>
+            <label> </label><br>
+            <input type="text" name="name" class="form-control" placeholder="123456789" required="" autofocus="">
+        </p>
+           <button class="btn btn btn-primary btn-block" type="submit">Сохранить</button> </div>
+           </form>
+        <p>
+                {{ id }}
+        </p>
+    </div>
 </body>
-</body></html>
+</body>
+</html>

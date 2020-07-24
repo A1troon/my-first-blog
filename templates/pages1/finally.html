@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Поиск</title>
+</head>
+
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+		<a class=" text-dark mr-md-auto " href="/"> Главная страница</a>
+		<nav class="my-2 my-md-0 mr-md-3">
+			<a class="btn btn-outline-secondary " href="/clear1">Зачистка интересов</a>
+			<a class="btn btn-outline-secondary " href="/clear2">Зачистка студентов</a>
+		</nav>
+		<a class="btn btn-outline-primary" href="/789">Загрузка файлов</a>
+	</div>
+
+
+<body class="text-center mb-4">
+    <div class="col-3 offset-4">
+            <h1 class="h3 mb-3 font-weight-normal">..</h1>
+
+<form method="POST">
+            {% csrf_token %}
+               <button class="btn btn btn-primary btn-block" type="submit">Найти совпадения</button>
+</div>
+</div>
+    </form>
+
+<div class="container">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-7 col-lg-2">
+      <div class="sidebar-sticky pt-3">
+
+      <div class="table">
+        <table class="table table-striped table-sm">
+        <thead><th>1</th></thead>
+                {% for Str in chelovechki %}
+            <tr>
+                <td>
+                        {{  Str }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table></div></div></nav>
+
+<main role="main" class="col-md-5 ml-sm-auto col-lg-9 px-md-40">
+      <div class="sidebar-sticky pt-3">
+
+      <div class="table">
+        <table class="table table-striped table-sm">
+        <thead><th>2</th></thead>
+                {% for Integer in chisla  %}
+            <tr>
+                <td>
+                        {{  Integer }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</div>
+</body>
+</html>

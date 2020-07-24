@@ -13,8 +13,11 @@
 
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 		<a class=" text-dark mr-md-auto " href="/"> Главная страница</a>
-        <a class="btn btn-outline-primary" href="/vkparsing">Добавить через вк</a>
-		<a class="btn btn-outline-primary" href="/789">Загрузить файл</a>
+		<nav class="my-2 my-md-0 mr-md-3">
+			<a class="btn btn-outline-secondary " href="/clear1">Зачистка интересов</a>
+			<a class="btn btn-outline-secondary " href="/clear2">Зачистка студентов</a>
+		</nav>
+		<a class="btn btn-outline-primary" href="/789">Загрузка файлов</a>
 	</div>
 
 <div class="container-fluid">
@@ -43,10 +46,7 @@
 
     <main role="main" class="col-md-4 ml-sm-auto col-lg-10 px-md-4">
 
-    <h3>Список Студентов <a class="btn btn-outline-secondary " href="/clearbd">Очистить список</a>
-
-    </h3>
-
+    <h3>Список Студентов </h3>
 
     <table>
       <div class="table">
@@ -60,10 +60,19 @@
   </style>
 
         {% for Person in men %}
-
+            <tr>
+                <td>
+                {{ Person.id }}
+                </td>
+            </tr>
             <tr>
                 <td>
                 {{ Person.name }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                {% for Interest in  Person.interests.all %}{{  Interest}} {% endfor %}
                 </td>
             </tr>
             <tr>
@@ -73,17 +82,11 @@
             </tr>
             <tr>
                 <td>
-                {% for Interest in  Person.interests.all %}{{  Interest}} {% endfor %}
-                </td>
-            </tr>
-
-            <tr>
-                <td>
                 <a href="editname/{{Person.id}}" target="_blank" onclick="window.open(this.href,this.target,'width= 300,height=300,scrollbars=1');return false;">Изменить имя</a>|
                     <a href="editgroup/{{Person.id}}"target="_blank" onclick="window.open(this.href,this.target,'width= 300,height=300,scrollbars=1');return false;">Изменить группу</a>
                     |<a href="editinterest/{{Person.id}}"target="_blank" onclick="window.open(this.href,this.target,'width= 300,height=300,scrollbars=1');return false;">Изменить интерес</a> |
                     <a href="delete/{{Person.id}}">Удалить</a>|
-                    <a href="addmoreinteres/{{Person.id}}"onclick="window.open(this.href,this.target,'width= 300,height=300,scrollbars=1');return false;">Добавить еще интерес</a>
+                    <a href="addmoreinteres/{{Person.id}}">Добавить еще интерес</a>
                 </td>
             </tr>
             <th>

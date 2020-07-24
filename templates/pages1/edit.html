@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Адрес страницы вк</title>
+
+    <title>Поиск</title>
 </head>
 <body>
-
-    <style>
-            body { background: #efefef ; }
+     <style>
+            body { background: #f6f6f6; }
         </style>
+
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 		<a class=" text-dark mr-md-auto " href="/"> Главная страница</a>
 		<nav class="my-2 my-md-0 mr-md-3">
-		<!--	 <a class="p-2 text-dark" href="/789">Загрузка файлов</a> -->
-			<a class="p-2 text-dark " href="/123">Студенты</a>
+			<a class="btn btn-outline-secondary " href="/clear1">Зачистка интересов</a>
+			<a class="btn btn-outline-secondary " href="/clear2">Зачистка студентов</a>
 		</nav>
+		<a class="btn btn-outline-primary" href="/789">Загрузка файлов</a>
 	</div>
 
-
-<body class="text-center mb-4">
+<div class="container">
     <div class="col-3 offset-4">
 
-    <h1 class="h3 mb-3 font-weight-normal">Введите адрес страницы вк</h1>
+   <form method="POST">
+       <div class="form-label-group">
 
-    <form method="POST" action="vkparsing">
         {% csrf_token %}
         <p>
-            <label> </label><br>
-            <input type="text" name="vkid" class="form-control" placeholder="123456789" required="" autofocus="">
-        </p>
+            <input type="text" name="izmenenie" value="{{izmenenie}}" />
            <button class="btn btn btn-primary btn-block" type="submit">Сохранить</button> </div>
-           </form>
 
+    </form>
+</div>
     </div>
-<h1 style="color:#ff0000" class="h3 mb-3 font-weight-normal">{{keyerror }}</h1>
-</body>
-</body></html>
+
+    </body>
+</html>

@@ -7,11 +7,12 @@
 <body class="container">
     <form method="POST">
         {% csrf_token %}
+         {% for Interest in interest %}<input type="radio" name="interest" value="{{ Interest }}">{{ Interest }} <Br>{% endfor %}
         <p>
 
             <label>Изменить на </label><br>
             <input type="text" name="izmenenie" value="{{izmenenie}}" />
         </p>
-        <input type="submit" value="Сохранить" >
+        <input type="submit" value="Сохранить"  >
     </form>
 </body>
